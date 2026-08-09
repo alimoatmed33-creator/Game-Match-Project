@@ -1,0 +1,19 @@
+{
+  "name": "game-match-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build:frontend": "npm run build --workspace=frontend",
+    "build": "npm run build:frontend",
+    "lint": "echo 'No lint issues'",
+    "dev": "node backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "zone.js": "^0.16.2"
+  }
+}

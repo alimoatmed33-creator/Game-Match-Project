@@ -1,0 +1,62 @@
+<section *ngIf="isLoading" class="container text-center mt-5">
+  <h3>Loading game...</h3>
+</section>
+
+<section *ngIf="!isLoading && errorMessage" class="container text-center mt-5">
+  <div class="card p-4 shadow-sm error-card">
+    <h3>Unable to load game details</h3>
+    <p>{{ errorMessage }}</p>
+    <a routerLink="/" class="btn btn-secondary mt-3">Back to library</a>
+  </div>
+</section>
+
+<section *ngIf="!isLoading && game" class="details-page">
+  <div class="container">
+    <div class="details-card card shadow-lg">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5">
+          <div class="image-frame">
+            <img [src]="game?.image" [alt]="game?.name" />
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="details-header">
+            <p class="eyebrow">Game Details</p>
+            <h1>{{ game?.name }}</h1>
+            <div class="detail-badges">
+              <span class="badge badge-genre">{{ game?.genre }}</span>
+              <span class="badge badge-platform">{{ game?.platform?.join(', ') }}</span>
+            </div>
+          </div>
+
+          <p class="lead detail-description">{{ game?.description }}</p>
+
+          <div class="details-grid">
+            <div>
+              <span>Publisher</span>
+              <strong>{{ game?.publisher }}</strong>
+            </div>
+            <div>
+              <span>Release Year</span>
+              <strong>{{ game?.releaseYear }}</strong>
+            </div>
+            <div>
+              <span>Mode</span>
+              <strong>{{ game?.mode }}</strong>
+            </div>
+            <div>
+              <span>Price</span>
+              <strong>{{ game?.priceType }}</strong>
+            </div>
+          </div>
+
+          <div class="details-actions">
+            <div class="rating">⭐ {{ game?.rating }}</div>
+            <a routerLink="/" class="btn btn-secondary">← Back to Library</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

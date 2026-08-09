@@ -1,0 +1,6 @@
+{
+  "name": "GAME-MATCH",
+  "description": "GameVault - Game matching and discovery platform featuring EA Sports FC 26, GTA V, Elden Ring, and more.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

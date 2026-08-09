@@ -1,0 +1,81 @@
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-copy">
+      <span class="eyebrow">GameVault</span>
+      <h1>Discover the best PC, PlayStation and Xbox games</h1>
+      <p>Explore top-rated titles, filter instantly, and open immersive game details.</p>
+
+      <div class="hero-actions">
+        <a href="#games" class="btn btn-primary btn-lg">Explore Games</a>
+      </div>
+
+      <div class="search-panel mt-4">
+        <input
+          class="form-control form-control-lg"
+          placeholder="Search games, genres, publishers..."
+          [(ngModel)]="searchText"
+          (input)="searchGames()" />
+        <span class="search-hint">{{ filteredGames.length }} games found</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="games-section" id="games">
+  <div class="section-header">
+    <div>
+      <p class="eyebrow">Featured</p>
+      <h2>Available Game Library</h2>
+    </div>
+    <p class="section-copy">Browse genuine game details pulled from the backend API in real time.</p>
+  </div>
+
+  <div class="filter-toolbar mb-4">
+    <span class="filter-label">Filter by genre:</span>
+    <button
+      type="button"
+      class="filter-chip"
+      [class.active]="selectedGenre === ''"
+      (click)="applyGenreFilter('')">
+      All
+    </button>
+    <button
+      type="button"
+      class="filter-chip"
+      *ngFor="let genre of genres"
+      [class.active]="selectedGenre === genre"
+      (click)="applyGenreFilter(genre)">
+      {{ genre }}
+    </button>
+  </div>
+
+  <div class="games-grid">
+    <ng-container *ngIf="filteredGames.length; else emptyState">
+      <div class="game-card-wrapper" *ngFor="let game of filteredGames; trackBy: trackById">
+        <article class="game-card card h-100 shadow-sm">
+          <img [src]="game.image" [alt]="game.name" class="card-img-top" />
+          <div class="card-body">
+            <div class="game-labels">
+              <span class="badge badge-genre">{{ game.genre }}</span>
+              <span class="badge badge-platform">{{ game.platform.join(', ') }}</span>
+            </div>
+            <h3 class="game-title">{{ game.name }}</h3>
+            <p class="game-description">{{ game.description | slice:0:100 }}{{ game.description.length > 100 ? '...' : '' }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <span class="rating">⭐ {{ game.rating }}</span>
+            <a [routerLink]="['/game', game._id]" class="btn btn-outline-light btn-sm">View details</a>
+          </div>
+        </article>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state card shadow-sm p-5 text-center">
+        <h3>No games found</h3>
+        <p>Try another search term or reset the filter.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>
